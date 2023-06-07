@@ -7,8 +7,8 @@ body * {
 :root {
   --text-color: white;
   --background-url: url(./assets/bg-mobile-dark.jpg);
-  --stroke-color: rgba(255, 255, 255, 0.1);
-  --superface-color: 1px solid rgba(255, 255, 255, 0.5);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --superface-color: rgba(255, 255, 255, 0.1);
   --superface-color-hover: rgba(255, 255, 255, 0.05);
   --highlight-color: rgba(255, 255, 255, 0.2);
   --switch-bg-url: url(./assets/moon.svg);
@@ -17,8 +17,8 @@ body * {
 .light {
   --text-color: black;
   --background-url: url(./assets/bg-mobile-light.jpg);
-  --stroke-color: rgba(0, 0, 0, 0.05);
-  --superface-color: 1px solid rgba(0, 0, 0, 0.5);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --superface-color: rgba(0, 0, 0, 0.05);
   --superface-color-hover: rgba(0, 0, 0, 0.02);
   --highlight-color: rgba(0, 0, 0, 0.1);
   --switch-bg-url: url(./assets/sun.svg);
@@ -26,6 +26,7 @@ body * {
 
 body {
   background: var(--background-url) no-repeat top center/cover;
+  height: 100vh;
 }
 
 body * {
@@ -34,8 +35,9 @@ body * {
 }
 
 #container {
-  width: 360px;
+  width: 100%;
   margin: 56px auto 0px;
+  max-width: 588px;
 }
 
 #profile {
@@ -71,19 +73,23 @@ body * {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+  animation: slide-out 0.4s;
 }
 
 .light #switch button {
-  right: 0;
-  left: initial;
+  animation: slide-in 0.4s forwards;
+}
+
+#switch button:hover {
+  outline: 8px solid var(--highlight-color);
 }
 
 #switch span {
   display: block;
   width: 64px;
   height: 24px;
-  background: var(--stroke-color);
-  border: 1px solid var(--superface-color);
+  background: var(--superface-color);
+  border: 1px solid var(--stroke-color);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 9999px;
@@ -102,8 +108,8 @@ ul li a {
   align-items: center;
   justify-content: center;
 
-  background-color: var(--stroke-color);
-  border: var(--superface-color);
+  background-color: var(--superface-color);
+  border: 1px solid var(--stroke-color);
   border-radius: 8px;
 
   backdrop-filter: blur(4px);
@@ -146,4 +152,31 @@ footer {
   padding: 24px 0;
   text-align: center;
   font-size: 14px;
+}
+
+@media (min-width: 700px) {
+  :root {
+    --background-url: url(./assets/bg-desktop-dark.jpg);
+  }
+  .light {
+    --background-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
 }
